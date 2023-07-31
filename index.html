@@ -15,12 +15,11 @@
     loadLogin()
 
     function loadLogin() {
-        let str = `
+        document.getElementById('display').innerHTML = `
     <lable>Username</lable><input type="text" id="username"> <br>
     <lable>Password</lable><input type="text" id="password"> <br>
     <button onclick="checkLogin()">Login</button>  <button onclick="loadRegister()" >Register</button>
-          ` ;
-        document.getElementById('display').innerHTML = str
+          `
     }
     function checkLogin(){
         let username=document.getElementById('username').value;
