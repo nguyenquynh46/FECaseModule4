@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <title>DEMO AJAXT</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/login&register/login.js"></script>
     <!--    <script src="AjaxC03/Home/home.js"></script>-->
 </head>
 <body>
@@ -11,47 +28,10 @@
 
 
 <script>
-    let API_URL = 'http://localhost:3000/user'
     loadLogin()
 
-    function loadLogin() {
-        let str = `
-    <lable>Username</lable><input type="text" id="username"> <br>
-    <lable>Password</lable><input type="text" id="password"> <br>
-    <button onclick="checkLogin()">Login</button>  <button onclick="loadRegister()" >Register</button>
-          ` ;
-        document.getElementById('display').innerHTML = str
-    }
-    function checkLogin(){
-        let username=document.getElementById('username').value;
-        let password=document.getElementById('password').value;
 
-        axios.get(`http://localhost:3000/user/search?username=${username}&password=${password}`).then(res=>{
-           if(res.data.length!==0){
-               alert('Bạn đã đăng nhập thành công')
-               if(res.data[0].role=='admin'){
-                   loadHomeUser()
-               }else {
-                   console.log(2)
-               }
-
-           }else {
-               axios.get(`http://localhost:3000/doctor/search?username=${username}&password=${password}`).then(res=>{
-                   if(res.data.length!==0){
-                       alert('Bạn đã đăng nhập thành công')
-                       loadHome()
-                   }else {
-                       alert('Tài khoản này không tồn tại . Vui lòng đăng nhập lại hoặc đăng ký tài khoản mới ')
-                   }
-               })
-
-           }
-        })
-        // alert('Dang nhap thanh cong')
-        // loadHome()
-    }
-
-    function loadHomeUser(){
+    function loadHomeAdmin(){
 // hiện ra cac Category
         axios.get(API_URL).then((res) => {
             let str='';
@@ -59,9 +39,9 @@
 
             data.map(item => {
                 str=`<div> <span onclick="loadListUser()">Home</span> | <span onclick="loadAdd()" >ADD</span> | <span onclick="loadEdit(${item.id}}">ListUser</span></div>
-    <div id="main"></div>
-<div id="main1"></div>
-<div id="main2"></div>`
+             <div id="main"></div>
+             <div id="main1"></div>
+            <div id="main2"></div>`
             })
             document.getElementById('display').innerHTML = str
         })
@@ -212,6 +192,7 @@
             }
         )
     }
+
 
 </script>
 </body>
