@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MEDINOVA - Hospital Website Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="js/login&register/login.js"></script>
+    <script src="js/home/homeByAdmin.js"></script>
+    <!--    <script src="AjaxC03/Home/home.js"></script>-->
+</head>
+<body>
+<div id="display"></div>
+
+
+<script>
+    loadLogin()
+
+
+
+//     function loadHomeUser(){
+// // hiện ra cac Category
+//         axios.get(API_URL).then((res) => {
+//             let str='';
+//             let data = res.data;
+//
+//             data.map(item => {
+//                 str=`<div> <span onclick="loadListAdmin()">Home</span> | <span onclick="loadAdd()" >ADD</span> | <span onclick="loadEdit(${item.id}}">ListUser</span></div>
+//     <div id="main"></div>
+// <div id="main1"></div>
+// <div id="main2"></div>
+// <div id="main3"></div>`
+//             })
+//             document.getElementById('display').innerHTML = str
+//         })
+//         loadListAdmin()
+//
+//     }
+//
+//     function loadListAdmin(){
+//         axios.get('http://localhost:3000/category').then((res) => {
+//             let str='';
+//             let data = res.data;
+//             data.map(item => {
+//                 str+=`${item.name} ${item.des}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
+//             })
+//             document.getElementById('main').innerHTML = str
+//         })
+//         axios.get('http://localhost:3000/category/search?role=vip').then((res) => {
+//
+//             let data = res.data;
+//             let id=data[0].id
+//
+//             axios.get(`http://localhost:3000/product/search?category.id=${id}`).then((res) => {
+//                 let str='<hr>';
+//                 let data1 = res.data;
+//                 data1.map(item => {
+//                     str+=`${item.name} ${item.price}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
+//                 })
+//                 document.getElementById('main1').innerHTML = str
+//             })
+//
+//
+//         })
+//         axios.get('http://localhost:3000/doctor').then((res) => {
+//             let str='<hr>';
+//             let data2 = res.data;
+//             data2.map(item => {
+//                 str+=`${item.name} ${item.profile}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
+//             })
+//             document.getElementById('main2').innerHTML = str
+//         })
+//         axios.get('http://localhost:3000/review').then((res) => {
+//             let str='<hr>';
+//             let data2 = res.data;
+//             data2.map(item => {
+//                 str+=`${item.name} <button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
+//             })
+//             document.getElementById('main3').innerHTML = str
+//
+//         })
+//
+//     }
+    // function listProductById(id){
+    //     axios.get(`http://localhost:3000/product/search?category.id=${id}`).then(res=> {
+    //
+    //         let data = res.data;
+    //         let str=`${data[0].category.detailDes} <br>`;
+    //         data.map(item => {
+    //             str+=`${item.name} + ${item.price} ${item.des}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <br>`
+    //         })
+    //         document.getElementById('main').innerHTML = str
+    //     })
+    //     document.getElementById('main1').innerHTML = ''
+    // }
+    function loadAdd(){
+        let str=`
+<input type="text" name="name" id="name">
+<input type="text" name="age" id="age" >
+<input type="text" name="score" id="score" >
+<input type="text" name="category" id="category" >
+<button onclick="save()" >SAVE</button>`
+        document.getElementById('main').innerHTML = str
+
+    }
+
+
+    // let API_URL = 'http://localhost:3000/houses';
+    //
+    // load();
+    //
+    // function load() {
+    //     axios.get(API_URL).then((res) => {
+    //         let str = '';
+    //         let data = res.data;
+    //         data.map(item => {
+    //             str += `<h1>${item.name}+<button onclick="deletes (${item.id})">Delete</button>+<button onclick="edit (${item.id})">Edit</button></h1>`
+    //         })
+    //         document.getElementById('display').innerHTML = str
+    //     })
+    // }
+
+    function save() {
+        let data = {
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            score: document.getElementById('score').value,
+            category:{
+                id: document.getElementById('category').value
+            }
+        }
+        console.log(data)
+
+        axios.post(API_URL, data).then((res) => {
+            loadHome()
+        })
+    }
+
+
+    //
+    function deletes(id) {
+        axios.delete(API_URL + `/${id}`).then((res) => {
+            loadHome()
+        })
+    }
+    function loadEdit(id){
+        console.log(id)
+        let str=`
+<input type="hidden" name="id" id="id">
+<input type="text" name="name" id="name">
+<input type="text" name="age" id="age" >
+<input type="text" name="score" id="score" >
+<input type="text" name="category" id="category" >
+<button onclick="update()" >Update</button>`
+        edit(id)
+        document.getElementById('main').innerHTML = str
+
+    }
+
+    function edit(id) {
+        axios.get(`http://localhost:3000/houses/search?id=${id}`).then((res) => {
+            let data = res.data;
+            console.log(data)
+            data.map(data => {
+                document.getElementById('id').value = data.id;
+                document.getElementById('name').value = data.name
+                document.getElementById('age').value = data.age
+                document.getElementById('score').value = data.score;
+                document.getElementById('category').value = data.category.id;
+
+            })
+        })
+
+    }
+    //
+    function update() {
+        let newData = {
+            id: document.getElementById('id').value,
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            score: document.getElementById('score').value,
+            category:{
+                id: document.getElementById('category').value
+            }
+        }
+        console.log(newData)
+        axios.put(API_URL + `/${newData.id}`, newData).then((res) => {
+                loadHome()
+            }
+        )
+    }
+
+</script>
+</body>
+</html>
