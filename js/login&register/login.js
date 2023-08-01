@@ -7,9 +7,9 @@ function loadLogin() {
          <div class="container-login100">         
           <div class="wrap-login100">         
            <div class="login100-pic js-tilt" data-tilt>         
-            <img src="../../images/img-01.png" alt="IMG">         
+            <img src="https://i.pinimg.com/564x/20/32/2e/20322e78cd112ee1f6bcc9dbb75c41ff.jpg" style="height: 300px; margin-left: 70px" alt="IMG">         
            </div>         
-                         
+            <div class="login100-form validate-form">
             <span class="login100-form-title">         
              Member Login         
             </span>         
@@ -34,23 +34,18 @@ function loadLogin() {
              <button class="login100-form-btn" onclick="checkLogin()">         
               Login         
              </button>         
-            </div>         
-                
-            <div class="text-center p-t-12">         
-             <span class="txt1">         
-              Forgot         
-             </span>         
-             <a class="txt2" href="#">         
-              Username / Password?         
-             </a>         
-            </div>         
-                
+            </div>             
+             
             <div class="text-center p-t-136">         
-             <a class="txt2" href="register.html">         
+            <button>
+            <a class="txt2" onclick="registerForm()">         
               Create your Account         
               <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>         
              </a>         
+            </button> 
             </div>         
+            </div>             
+            
                
           </div>         
          </div>         
@@ -68,17 +63,18 @@ function checkLogin(){
     axios.get(`http://localhost:3000/user/search?username=${username}&password=${password}`).then(res=>{
         if(res.data.length!==0){
             alert('Bạn đã đăng nhập thành công')
+            localStorage.setItem("account", JSON.stringify(res.data[0]))
             if(res.data[0].role==='admin'){
                 loadHomeAdmin()
             }else {
-
+                loadHomeUser()
             }
 
         }else {
             axios.get(`http://localhost:3000/doctor/search?username=${username}&password=${password}`).then(res=>{
                 if(res.data.length!==0){
                     alert('Bạn đã đăng nhập thành công')
-                    loadHome()
+                    loadHomeDoctor()
                 }else {
                     alert('Tài khoản này không tồn tại . Vui lòng đăng nhập lại hoặc đăng ký tài khoản mới ')
                 }

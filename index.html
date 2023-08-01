@@ -20,180 +20,80 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+<!--============================================================================================================-->
+<!-- script -->
+    <script src="js/user/admin.js"></script>
+    <script src="js/user/homeUser.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/order/add.js"></script>
+    <script src="js/order/edit.js"></script>
+    <script src="js/product/add.js"></script>
+    <script src="js/product/listProduct.js"></script>
     <script src="js/login&register/login.js"></script>
-    <!--    <script src="AjaxC03/Home/home.js"></script>-->
+    <script src="js/login&register/register.js"></script>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="vendor/bootstrap/css/font-awesome.css">
+    <script src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="vendor/bootstrap/js/main.js"></script>
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/tooltip.js"></script>
+    <link rel="stylesheet" href="vendor/css-hamburgers/hamburgers.css">
+    <script src="vendor/lib/easing/easing.js"></script>
+    <script src="vendor/lib/owlcarousel/owl.carousel.js"></script>
+    <link rel="stylesheet" href="vendor/lib/tempusdominus/css/tempusdominus-bootstrap-4.css">
+    <script src="vendor/lib/tempusdominus/js/tempusdominus-bootstrap-4.js"></script>
+
+    <!--script-->
 </head>
 <body>
+<div id="navbar">
+
+</div>
+
+<div class="container-fluid sticky-top bg-white shadow-sm">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0">
+            <a href="index.html" class="navbar-brand">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-clinic-medical me-2"></i>Medinova</h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto py-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Service</a>
+                    <a href="price.html" class="nav-item nav-link">Pricing</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="detail.html" class="dropdown-item">Blog Detail</a>
+                            <a href="team.html" class="dropdown-item">The Team</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="appointment.html" class="dropdown-item">Appointment</a>
+                            <a href="search.html" class="dropdown-item">Search</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
 <div id="display"></div>
+
+
 
 
 <script>
     loadLogin()
-
-
-    function loadHomeAdmin(){
-// hiện ra cac Category
-        axios.get(API_URL).then((res) => {
-            let str='';
-            let data = res.data;
-
-            data.map(item => {
-                str=`<div> <span onclick="loadListUser()">Home</span> | <span onclick="loadAdd()" >ADD</span> | <span onclick="loadEdit(${item.id}}">ListUser</span></div>
-             <div id="main"></div>
-             <div id="main1"></div>
-            <div id="main2"></div>`
-            })
-            document.getElementById('display').innerHTML = str
-        })
-        loadListUser()
-
-    }
-
-    function loadListUser(){
-        axios.get('http://localhost:3000/category').then((res) => {
-            let str='';
-            let data = res.data;
-            data.map(item => {
-                str+=`${item.name} ${item.des}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
-            })
-            document.getElementById('main').innerHTML = str
-        })
-        axios.get('http://localhost:3000/category/search?role=vip').then((res) => {
-
-            let data = res.data;
-            let id=data[0].id
-
-            axios.get(`http://localhost:3000/product/search?category.id=${id}`).then((res) => {
-                let str='<hr>';
-                let data1 = res.data;
-                data1.map(item => {
-                    str+=`${item.name} ${item.price}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
-                })
-                document.getElementById('main1').innerHTML = str
-            })
-
-
-        })
-        axios.get('http://localhost:3000/doctor').then((res) => {
-            let str='<hr>';
-            let data2 = res.data;
-            data2.map(item => {
-                str+=`${item.name} ${item.profile}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <button onclick="listProductById(${item.id})">Chi tiết</button> <br>`
-            })
-            document.getElementById('main2').innerHTML = str
-        })
-
-    }
-    function listProductById(id){
-        axios.get(`http://localhost:3000/product/search?category.id=${id}`).then(res=> {
-
-            let data = res.data;
-            let str=`${data[0].category.detailDes} <br>`;
-            data.map(item => {
-                str+=`${item.name} + ${item.price} ${item.des}<button onclick="deletes (${item.id})">Delete</button><button onclick="loadEdit (${item.id})">Edit</button> <br>`
-            })
-            document.getElementById('main').innerHTML = str
-        })
-        document.getElementById('main1').innerHTML = ''
-    }
-    function loadAdd(){
-        let str=`
-<input type="text" name="name" id="name">
-<input type="text" name="age" id="age" >
-<input type="text" name="score" id="score" >
-<input type="text" name="category" id="category" >
-<button onclick="save()" >SAVE</button>`
-        document.getElementById('main').innerHTML = str
-
-    }
-
-
-    // let API_URL = 'http://localhost:3000/houses';
-    //
-    // load();
-    //
-    // function load() {
-    //     axios.get(API_URL).then((res) => {
-    //         let str = '';
-    //         let data = res.data;
-    //         data.map(item => {
-    //             str += `<h1>${item.name}+<button onclick="deletes (${item.id})">Delete</button>+<button onclick="edit (${item.id})">Edit</button></h1>`
-    //         })
-    //         document.getElementById('display').innerHTML = str
-    //     })
-    // }
-
-    function save() {
-        let data = {
-            name: document.getElementById('name').value,
-            age: document.getElementById('age').value,
-            score: document.getElementById('score').value,
-            category:{
-                id: document.getElementById('category').value
-            }
-        }
-        console.log(data)
-
-        axios.post(API_URL, data).then((res) => {
-            loadHome()
-        })
-    }
-
-
-    //
-    function deletes(id) {
-        axios.delete(API_URL + `/${id}`).then((res) => {
-            loadHome()
-        })
-    }
-    function loadEdit(id){
-        console.log(id)
-        let str=`
-<input type="hidden" name="id" id="id">
-<input type="text" name="name" id="name">
-<input type="text" name="age" id="age" >
-<input type="text" name="score" id="score" >
-<input type="text" name="category" id="category" >
-<button onclick="update()" >Update</button>`
-        edit(id)
-        document.getElementById('main').innerHTML = str
-
-    }
-
-    function edit(id) {
-        axios.get(`http://localhost:3000/houses/search?id=${id}`).then((res) => {
-            let data = res.data;
-            console.log(data)
-            data.map(data => {
-                document.getElementById('id').value = data.id;
-                document.getElementById('name').value = data.name
-                document.getElementById('age').value = data.age
-                document.getElementById('score').value = data.score;
-                document.getElementById('category').value = data.category.id;
-
-            })
-        })
-
-    }
-    //
-    function update() {
-        let newData = {
-            id: document.getElementById('id').value,
-            name: document.getElementById('name').value,
-            age: document.getElementById('age').value,
-            score: document.getElementById('score').value,
-            category:{
-                id: document.getElementById('category').value
-            }
-        }
-        console.log(newData)
-        axios.put(API_URL + `/${newData.id}`, newData).then((res) => {
-                loadHome()
-            }
-        )
-    }
-
+    let APP_URL = 'http://localhost:3000/category'
 
 </script>
+
 </body>
 </html>
